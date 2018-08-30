@@ -1,1 +1,0 @@
-# thaiph5 registered
