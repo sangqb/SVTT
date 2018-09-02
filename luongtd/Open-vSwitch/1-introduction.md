@@ -74,5 +74,5 @@ $ fakeroot debian/rules clean
 ![](images/1-OVS-Introduction/build5.png)
 
 #### 3.3.2. Cài đặt .deb Packages
-Các lệnh này áp dụng để cài đặt từ các gói Debian mà bạn tự xây dựng, như được mô tả trong phần trước. Trong trường hợp này, sử dụng lệnh như ```dpkg -i``` để cài đặt các tệp .deb mà bạn tạo. Ta sẽ phải tự cài đặt bất kỳ phụ thuộc bị thiếu nào.
+  Các lệnh này áp dụng để cài đặt từ các gói Debian mà ta vừa tự xây dựng, như được mô tả trong phần trước. Trong trường hợp này, sử dụng lệnh như ```dpkg -i``` để cài đặt các tệp .deb mà ta tạo. Ta sẽ phải tự cài đặt bất kỳ phụ thuộc bị thiếu nào.
 ![](images/1-OVS-Introduction/install.png)
