@@ -46,8 +46,8 @@ $ apt-get install build-essential fakeroot
 ```
   2. Download và giải nén OVS source distribution và cd vào top level directory
 ![](images/1-OVS-Introduction/build0.png)
-  3. Cài đặt các gói phụ thuộc (build dependencies) được liệt kê trong "Build-Depends:" ở gần đầu file debian/control. Bạn có thể cài đặt theo bất kỳ cách nào bạn thích, ví dụ: với apt-get install.
-  Kiểm tra xem đã đủ các gói phụ thuộc chưa bằng cách chạy dpkg-checkbuilddeps ở cấp cao nhất trong thư mục OVS của bạn. Nếu bạn đã cài đặt tất cả các phụ thuộc đúng cách, dpkg-checkbuilddeps sẽ thoát mà không cần in bất kỳ thứ gì. Nếu bạn quên cài đặt một số phụ thuộc, nó sẽ cho bạn biết cái nào còn thiếu.
+  3. Cài đặt các gói phụ thuộc (build dependencies) được liệt kê trong "Build-Depends:" ở gần đầu file debian/control. Ta có thể cài đặt với apt-get install.
+  Kiểm tra xem đã đủ các gói phụ thuộc chưa bằng cách chạy dpkg-checkbuilddeps ở cấp cao nhất trong thư mục OVS. Nếu đã cài đặt tất cả các phụ thuộc đúng cách, dpkg-checkbuilddeps sẽ thoát mà không cần in bất kỳ thứ gì. Nếu ta quên cài đặt một số phụ thuộc, nó sẽ cho ta biết mục nào còn thiếu.
 ![](images/1-OVS-Introduction/build3-0.png)
 ![](images/1-OVS-Introduction/build3-1.png)
 ![](images/1-OVS-Introduction/build3-2.png)
@@ -68,6 +68,7 @@ $ fakeroot debian/rules binary
 $ fakeroot debian/rules clean
   ```
   hoặc bắt đầu từ một bản sao mới của source tree.
+
   5. File .deb được tạo ra sẽ nằm ở thư parent directory của OVS source distribution.
 ![](images/1-OVS-Introduction/build4.png)
 ![](images/1-OVS-Introduction/build5.png)
