@@ -63,7 +63,7 @@ $ fakeroot debian/rules binary
   ```sh
   DEB_BUILD_OPTIONS='parallel=8 nocheck' fakeroot debian/rules binary
   ```
-  ```Chú ý:``` Có một vài cạm bẫy trong hệ thống packaging Building của Debian, thỉnh thoảng, bạn có thể thấy rằng trong một cây mà bạn đã sử dụng trong một thời gian, lệnh build ở trên thoát ngay lập tức mà không thực sự build bất cứ thứ gì. Để khắc phục sự cố, chạy:
+  Chú ý: Có một vài "cạm bẫy" (pitfall) trong hệ thống packaging Building của Debian, thỉnh thoảng, bạn có thể thấy rằng trong một cây mà bạn đã sử dụng trong một thời gian, lệnh build ở trên thoát ngay lập tức mà không thực sự build bất cứ thứ gì. Để khắc phục sự cố, chạy:
   ```sh
 $ fakeroot debian/rules clean
   ```
