@@ -88,6 +88,8 @@ $ fakeroot debian/rules clean
 ![](images/1-OVS-Introduction/install.png)
 
 ## <a name="ex"></a> 5. Ví dụ sử dụng OpenvSwitch
+Trong ví dụ này, ta sẽ tạo ra một bridge trên OpenvSwitch đóng vai trò là một switch ảo. Ta sẽ tạo thêm các port ảo và interface ảo gắn cho các máy ảo để chúng kết nối với bên ngoài thông qua bridge. Trước hết, ta giới thiệu sơ lược về một số kiến thức và công cụ sẽ sử dụng trong ví dụ này.
+
 ### 5.1 Giới thiệu về Linux bridge và Mininet
 #### 5.1.1. Linux Bridge
 - Linux bridge là một phần mềm được tích hợp vào trong nhân Linux để giải quyết vấn đề ảo hóa phần network trong các máy vật lý. Về mặt logic, Linux bridge sẽ tạo ra một switch ảo để cho các máy ảo (VM) kết nối được vào và có thể nói chuyện với nhau cũng như sử dụng để kết nối với mạng ngoài.
@@ -108,8 +110,7 @@ $ fakeroot debian/rules clean
 - Các host ảo, switch, liên kết và các controller trên mininet là các thực thể thực sự, đưọc giả lập dưới dạng phần mềm thay vì phần cứng. Một host mininet có thể thực hiện ssh vào đó, chạy bất kì phần mềm nào đã cài trên hệ thống linux (môi trường mà mininet đang chạy). Các phần mềm này có thể gửi gói tin thông qua ethernet interface của mininet với tốc độ liên kết và trễ đặt trưóc.
 - Mininet cho phép tạo topo mạng nhanh chóng, tùy chỉnh được topo mạng, tùy chỉnh được việc chuyển tiếp gói tin, chạy được phần mềm thực sự như web server, TCP monitoring, Wireshark,... Mininet cũng dễ dàng sử dụng và không yêu cầu cấu hình gì đặc biệt về phần cứng để chạy. Mininet có thể cài trên laptop, server, VM, cloud (linux),...
 
-### 5.2 Ví dụ
-Trong ví dụ này, ta sẽ tạo ra một bridge trên OpenvSwitch đóng vai trò là một switch ảo và thông qua nó để kết nối máy tính với internet. Ta sẽ tạo thêm các port ảo và interface ảo gắn cho các máy ảo để chúng kết nối với bên ngoài.
+### 5.2. Tiến hành ví dụ sử dụng OVS
 
 - Kiểm tra routing table:
 ```route -n```
