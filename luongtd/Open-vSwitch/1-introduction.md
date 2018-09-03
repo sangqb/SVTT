@@ -101,6 +101,7 @@ $ fakeroot debian/rules clean
 - Kiểm tra routing table:
 ```route -n```
 ![](images/1-OVS-Introduction/vd1.png)
+
 Laptop này có một cổng enp3s0 với IP và Default Gateway được cấp bởi giao thức DHCP. Ta sẽ mô hình hóa lại những phần tử trên với sơ đồ sau:
 ![](images/1-OVS-Introduction/model1.png) 
 - Tạo một bridge mới có tên mybridge: 
@@ -111,18 +112,20 @@ Laptop này có một cổng enp3s0 với IP và Default Gateway được cấp 
 - Kiểm tra: 
 ```ifconfig``` 
 ![](images/1-OVS-Introduction/vd3.png)
-Ta vừa thêm một OpenvSwitch có tên mybridge. Ở thời điểm này mybridge chưa có kết nối với bên ngoài. wlp2s0 chưa kết nối với mybridge. Khi laptop muốn kết nối với network bên ngoài, nó vẫn phải đi qua cổng wlp2s0.
+
+Ta vừa thêm một OpenvSwitch có tên mybridge. Ở thời điểm này mybridge chưa có kết nối với bên ngoài. enp3s0 chưa kết nối với mybridge. Khi laptop muốn kết nối với network bên ngoài, nó vẫn phải đi qua cổng enp3s0.
 ![](images/1-OVS-Introduction/model2.png)
-- Kết nối wlp2s0 với mybridge: 
+- Kết nối enp3s0 với mybridge: 
 ```sudo ovs-vsctl add-port mybridge enp3s0```
 - Kiểm tra kết quả: 
 ```sudo ovs-vsctl show```
 - Kiểm tra kết nối với internet: ```ping google.com```
 ![](images/1-OVS-Introduction/vd4.png)
-// Có vẻ như laptop đã bị mất kết nối internet. Bằng lệnh ```sudo ovs-vsctl add port mybridge wlp2s0``` ta đã định hướng lại wlp2s0 kết nối với mybridge. 
+
+Có vẻ như laptop đã bị mất kết nối internet. Bằng lệnh ```sudo ovs-vsctl add port mybridge wlp2s0``` ta đã định hướng lại wlp2s0 kết nối với mybridge. 
 ![](images/1-OVS-Introduction/model3.png)
-Đó là chính xác là điều ta muốn nhưng laptop vẫn thử kết nối với network bên ngoài trực tiếp qua wlp2s0 (mặc dù liên kết này không còn nữa).
-Bây giờ, ta sẽ điều khiển luồng kết nối từ laptop tới switch ảo mybridge để đến được cổng wlp2s0 bằng cách xóa cấu hình IP của wlp2s0 và thiết lập mybridge thành một DHCP client. Sơ đồ dưới đây thể hiện hướng kết nối mà ta sẽ thực hiện. 
+Đó là chính xác là điều ta muốn nhưng laptop vẫn thử kết nối với network bên ngoài trực tiếp qua enp3s0 (mặc dù liên kết này không còn nữa).
+Bây giờ, ta sẽ điều khiển luồng kết nối từ laptop tới switch ảo mybridge để đến được cổng enp3s0 bằng cách xóa cấu hình IP của enp3s0 và thiết lập mybridge thành một DHCP client. Sơ đồ dưới đây thể hiện hướng kết nối mà ta sẽ thực hiện. 
 ![](images/1-OVS-Introduction/model4.png)
 - Xóa cấu hình IP của wlp2s0: 
 ```sudo ifconfig enp3s0 0```
@@ -142,14 +145,17 @@ Như vậy là ta đã thiết lập thành công hướng kết nối mong mu�
 ```ifconfig vport2 up```
 - Kiểm tra: ifconfig
 ![](images/1-OVS-Introduction/vd7.png)
+
 Ta đã tạo được 2 interface ảo.
 - Thêm tap interfaces vào mybridge:	
 ```ovs-vsctl add-port mybridge vport1 -- add-port mybridge vport2```
 - Kiểm tra chi tiết mybridge: ```ovs-vsctl show ```
 ![](images/1-OVS-Introduction/vd8.png)
-Như vậy ta đã gán hai interface ảo vào mybridge.
+
+Như vậy ta đã gán hai interface ảo vào mybridge. Sơ đồ tương đương lúc này:
 ![](images/1-OVS-Introduction/model5.png)
 - Gán các interface ảo cho máy ảo: trên Oracle Virtualbox, trong tab Settings/network chọn đến 2 interface ảo vport1 và vport2 vừa tạo.
+
 ![](images/1-OVS-Introduction/vd9.png)
 - Hai máy ảo đã nhận được IP từ DHCP và có thể kết nối với bên ngoài.
 ![](images/1-OVS-Introduction/vd10.png)
@@ -160,3 +166,4 @@ Như vậy ta đã gán hai interface ảo vào mybridge.
 - Kiểm tra thông tin về mybridge:
 ```sudo ovs-ofctl show mybridge```
 ![](images/1-OVS-Introduction/vd12.png)
+
