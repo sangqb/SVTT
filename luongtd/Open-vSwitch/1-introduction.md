@@ -1,6 +1,5 @@
 # Tổng quan về Software Defined Networking và OpenvSwitch
 
-# Mục lục
 ## [1. Software Defined Networking và OpenFlow](#SDN)
 ## [2. OpenFlow](#OF)
 ## [3. OpenvSwitch](#OVS)
