@@ -101,7 +101,7 @@ $ fakeroot debian/rules clean
 - Mininet cho phép tạo topo mạng nhanh chóng, tùy chỉnh được topo mạng, tùy chỉnh được việc chuyển tiếp gói tin, chạy được phần mềm thực sự như web server, TCP monitoring, Wireshark,... Mininet cũng dễ dàng sử dụng và không yêu cầu cấu hình gì đặc biệt về phần cứng để chạy. Mininet có thể cài trên laptop, server, VM, cloud (linux),...
 
 ### 5.2 Ví dụ
-Trong ví dụ này, ta sẽ tạo ra một bridge trên OpenvSwitch đóng vai trò là một switch ảo và thông qua nó để kết nối máy tính với internet. Tạo sẽ tạo thêm các port ảo và interface ảo gắn cho các máy ảo để chúng kết nối với bên ngoài.
+Trong ví dụ này, ta sẽ tạo ra một bridge trên OpenvSwitch đóng vai trò là một switch ảo và thông qua nó để kết nối máy tính với internet. Ta sẽ tạo thêm các port ảo và interface ảo gắn cho các máy ảo để chúng kết nối với bên ngoài.
 
 - Kiểm tra routing table:
 ```route -n```
