@@ -15,6 +15,7 @@ OpenFlow là tiêu chuẩn đầu tiên, cung cấp khả năng truyền thông 
 - OpenFlow Protocol: giao thức cung cấp phương thức tiêu chuẩn và mở cho một bộ điều khiển truyền thông với thiết bị.
 - Flow Table: một liên kết hành động với mỗi luồng, giúp thiết bị xử lý các luồng.
 ![](images/1-OVS-Introduction/1-OpenFlow.png)
+
 ## 3. OpenvSwitch
 ### 3.1. Giới thiệu
 - OpenvSwitch (OVS) là một dự án phần mềm mã nguồn mở về chuyển mạch ảo đa lớp hỗ trợ giao thức Openflow.
@@ -31,6 +32,7 @@ OpenFlow là tiêu chuẩn đầu tiên, cung cấp khả năng truyền thông 
     - Các giao thức đường hầm (GRE, VXLAN, IPSEC, tunneling)
     - Kiểm soát QoC
 ![](images/1-OVS-Introduction/1-OVS-overview2.png)
+
 ### 3.2. Các thành phần chính của OpenvSwitch:
 - ovs-vswitchd: thực hiện chuyển đổi các luồng chuyển mạch
 - ovsdb-server: là một lightweight database server, cho phép ovs-vswitchd thực hiện các truy vấn đến cấu hình
@@ -38,8 +40,8 @@ OpenFlow là tiêu chuẩn đầu tiên, cung cấp khả năng truyền thông 
 - ovs-vsctl: tiện ích để truy vấn và cập nhật cấu hình ovs-vswitchd
 - ovs-appctl: tiện ích gửi command để chạy OVS
 
-### 3.3. Cài đặt OpenvSwitch trên Ubuntu 18.04 LTS
-#### 3.3.1. Building OpenvSwitch Debian packages
+## 4. Cài đặt OpenvSwitch trên Ubuntu 18.04 LTS
+### 4.1. Building OpenvSwitch Debian packages
   1. Cài đặt các gói "build-essential" và fakeroot"
 ```sh
 $ apt-get install build-essential fakeroot
@@ -63,7 +65,7 @@ $ fakeroot debian/rules binary
   ```sh
   DEB_BUILD_OPTIONS='parallel=8 nocheck' fakeroot debian/rules binary
   ```
-  Chú ý: Có một vài "cạm bẫy" (pitfall) trong hệ thống packaging Building của Debian, thỉnh thoảng, bạn có thể thấy rằng trong một cây mà bạn đã sử dụng trong một thời gian, lệnh build ở trên thoát ngay lập tức mà không thực sự build bất cứ thứ gì. Để khắc phục sự cố, chạy:
+  Chú ý: Có một vài "bẫy" (pitfall) trong hệ thống packaging Building của Debian, thỉnh thoảng, có thể thấy rằng trong một cây đã sử dụng trong một thời gian, lệnh build ở trên thoát ngay lập tức mà không thực sự build bất cứ thứ gì. Để khắc phục sự cố, chạy:
   ```sh
 $ fakeroot debian/rules clean
   ```
@@ -73,6 +75,88 @@ $ fakeroot debian/rules clean
 ![](images/1-OVS-Introduction/build4.png)
 ![](images/1-OVS-Introduction/build5.png)
 
-#### 3.3.2. Cài đặt .deb Packages
+### 4.2. Cài đặt .deb Packages
   Các lệnh này áp dụng để cài đặt từ các gói Debian mà ta vừa tự xây dựng, như được mô tả trong phần trước. Trong trường hợp này, sử dụng lệnh như ```dpkg -i``` để cài đặt các tệp .deb mà ta tạo. Ta sẽ phải tự cài đặt bất kỳ phụ thuộc bị thiếu nào.
 ![](images/1-OVS-Introduction/install.png)
+
+## 5. Ví dụ sử dụng OpenvSwitch
+### 5.1 Giới thiệu về Linux bridge và Mininet
+#### 5.1.1. Linux Bridge
+- Linux bridge là một phần mềm được tích hợp vào trong nhân Linux để giải quyết vấn đề ảo hóa phần network trong các máy vật lý. Về mặt logic, Linux bridge sẽ tạo ra một switch ảo để cho các máy ảo (VM) kết nối được vào và có thể nói chuyện với nhau cũng như sử dụng để kết nối với mạng ngoài.
+- Kiến trúc:
+	- Tap: Có thể hiểu là một giao diện mạng để các máy ảo có thể giao tiếp được với bridge và nó nằm trong nhân kernel. Tap hoạt động ở lớp 2 trong mô hình OSI.
+	- fd (forward data): dùng để chuyển tiếp data từ máy ảo.
+- Chức năng của một switch ảo do Linux bridge tạo ra:
+	- STP: tính năng chống loop gói tin trong switch
+	- VLAN: Virtual LAN
+	- FDB: tính năng chuyển gói tin theo database được xây dựng giúp tăng tốc độ switch
+![](images/1-OVS-Introduction/bridge-1.png)
+
+#### 5.1.2. Mininet
+- Mininet là một công cụ giả lập mạng, bao gồm tập hợp các host đầu cuối, các switch, router và các liên kết trên một Linux kernel. Mininet sử dụng công nghệ ảo hóa (ở mức đơn giản) để tạo nên hệ thống mạng hoàn chỉnh, chạy chung trên cùng một kernel, hệ thống và user code.
+- Các host ảo, switch, liên kết và các controller trên mininet là các thực thể thực sự, đưọc giả lập dưới dạng phần mềm thay vì phần cứng. Một host mininet có thể thực hiện ssh vào đó, chạy bất kì phần mềm nào đã cài trên hệ thống linux (môi trường mà mininet đang chạy). Các phần mềm này có thể gửi gói tin thông qua ethernet interface của mininet với tốc độ liên kết và trễ đặt trưóc.
+- Mininet cho phép tạo topo mạng nhanh chóng, tùy chỉnh được topo mạng, tùy chỉnh được việc chuyển tiếp gói tin, chạy được phần mềm thực sự như web server, TCP monitoring, Wireshark,... Mininet cũng dễ dàng sử dụng và không yêu cầu cấu hình gì đặc biệt về phần cứng để chạy. Mininet có thể cài trên laptop, server, VM, cloud (linux),...
+
+### 5.2 Ví dụ
+- Kiểm tra routing table:
+```route -n```
+![](images/1-OVS-Introduction/vd1.png)
+Laptop này có một cổng enp3s0 với IP và Default Gateway được cấp bởi giao thức DHCP. Ta sẽ mô hình hóa lại những phần tử trên với sơ đồ sau:
+![](images/1-OVS-Introduction/model1.png) 
+- Tạo một bridge mới có tên mybridge: 
+```sudo ovs-vsctl add-br mybridge``` 
+![](images/1-OVS-Introduction/vd2.png)
+- Bật (turn up) mybridge port: 
+```sudo ifconfig mybridge up```
+- Kiểm tra: 
+```ifconfig``` 
+![](images/1-OVS-Introduction/vd3.png)
+Ta vừa thêm một OpenvSwitch có tên mybridge. Ở thời điểm này mybridge chưa có kết nối với bên ngoài. wlp2s0 chưa kết nối với mybridge. Khi laptop muốn kết nối với network bên ngoài, nó vẫn phải đi qua cổng wlp2s0.
+![](images/1-OVS-Introduction/model2.png)
+- Kết nối wlp2s0 với mybridge: 
+```sudo ovs-vsctl add-port mybridge enp3s0```
+- Kiểm tra kết quả: 
+```sudo ovs-vsctl show```
+- Kiểm tra kết nối với internet: ```ping google.com```
+![](images/1-OVS-Introduction/vd4.png)
+// Có vẻ như laptop đã bị mất kết nối internet. Bằng lệnh ```sudo ovs-vsctl add port mybridge wlp2s0``` ta đã định hướng lại wlp2s0 kết nối với mybridge. 
+![](images/1-OVS-Introduction/model3.png)
+Đó là chính xác là điều ta muốn nhưng laptop vẫn thử kết nối với network bên ngoài trực tiếp qua wlp2s0 (mặc dù liên kết này không còn nữa).
+Bây giờ, ta sẽ điều khiển luồng kết nối từ laptop tới switch ảo mybridge để đến được cổng wlp2s0 bằng cách xóa cấu hình IP của wlp2s0 và thiết lập mybridge thành một DHCP client. Sơ đồ dưới đây thể hiện hướng kết nối mà ta sẽ thực hiện. 
+![](images/1-OVS-Introduction/model4.png)
+- Xóa cấu hình IP của wlp2s0: 
+```sudo ifconfig enp3s0 0```
+- Chuyển cổng (internal port) mybridge thành một DHCP client để nó có thể nhận IP và Default Gateway từ giao thức DHCP: 
+```sudo dhclient mybridge```
+- Kiểm tra ```ifconfig```
+![](images/1-OVS-Introduction/vd5.png)
+- Kiểm tra bảng định tuyến: ```route -n```
+- Kiểm tra kết nối: ping google.com
+![](images/1-OVS-Introduction/vd6.png)
+Như vậy là ta đã thiết lập thành công hướng kết nối mong muốn đi qua vSwitch mybridge và có thể kết nối lại với internet. Tiếp theo ta sẽ thêm 2 tap interface để sử dụng cho kết nối với các máy ảo (Ubuntu Mininet).
+- Thêm tap interfaces vào mybridge để sử dụng cho các máy ảo: 	
+```ip tuntap add mode tap vport1```							
+```ip tuntap add mode tap vport2```
+- Bật (turn up) port1 và port
+```ifconfig vport1 up ```
+```ifconfig vport2 up```
+- Kiểm tra: ifconfig
+![](images/1-OVS-Introduction/vd7.png)
+Ta đã tạo được 2 interface ảo.
+- Thêm tap interfaces vào mybridge:	
+```ovs-vsctl add-port mybridge vport1 -- add-port mybridge vport2```
+- Kiểm tra chi tiết mybridge: ```ovs-vsctl show ```
+![](images/1-OVS-Introduction/vd8.png)
+Như vậy ta đã gán hai interface ảo vào mybridge.
+![](images/1-OVS-Introduction/model5.png)
+- Gán các interface ảo cho máy ảo: trên Oracle Virtualbox, trong tab Settings/network chọn đến 2 interface ảo vport1 và vport2 vừa tạo.
+![](images/1-OVS-Introduction/vd9.png)
+- Hai máy ảo đã nhận được IP từ DHCP và có thể kết nối với bên ngoài.
+![](images/1-OVS-Introduction/vd10.png)
+
+- Xem forwarding table (MAC address table): 
+```sudo ovs-appctl fdb/show mybridge ```
+![](images/1-OVS-Introduction/vd11.png)
+- Kiểm tra thông tin về mybridge:
+```sudo ovs-ofctl show mybridge```
+![](images/1-OVS-Introduction/vd12.png)
