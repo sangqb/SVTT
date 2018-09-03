@@ -85,6 +85,7 @@ $ fakeroot debian/rules clean
 #### 5.1.1. Linux Bridge
 - Linux bridge là một phần mềm được tích hợp vào trong nhân Linux để giải quyết vấn đề ảo hóa phần network trong các máy vật lý. Về mặt logic, Linux bridge sẽ tạo ra một switch ảo để cho các máy ảo (VM) kết nối được vào và có thể nói chuyện với nhau cũng như sử dụng để kết nối với mạng ngoài.
 - Kiến trúc:
+
 ![](images/1-OVS-Introduction/bridge-1.png)
 	- Tap: Có thể hiểu là một giao diện mạng để các máy ảo có thể giao tiếp được với bridge và nó nằm trong nhân kernel. Tap hoạt động ở lớp 2 trong mô hình OSI.
 	- fd (forward data): dùng để chuyển tiếp data từ máy ảo.
@@ -92,7 +93,7 @@ $ fakeroot debian/rules clean
 	- STP: tính năng chống loop gói tin trong switch
 	- VLAN: Virtual LAN
 	- FDB: tính năng chuyển gói tin theo database được xây dựng giúp tăng tốc độ switch
-![](images/1-OVS-Introduction/bridge-1.png)
+
 
 #### 5.1.2. Mininet
 - Mininet là một công cụ giả lập mạng, bao gồm tập hợp các host đầu cuối, các switch, router và các liên kết trên một Linux kernel. Mininet sử dụng công nghệ ảo hóa (ở mức đơn giản) để tạo nên hệ thống mạng hoàn chỉnh, chạy chung trên cùng một kernel, hệ thống và user code.
@@ -167,7 +168,7 @@ Như vậy ta đã gán hai interface ảo vào mybridge. Sơ đồ tương đư
 - Xem forwarding table (MAC address table): 
 ```sudo ovs-appctl fdb/show mybridge ```
 ![](images/1-OVS-Introduction/vd11.png)
-- Kiểm tra thông tin về mybridge:
+- Kiểm tra thông tin về mybridge: (ovs-ofctl là command dùng với OpenFlow Switch để cài đặt và truy vấn các tham số OpenFlow)
 ```sudo ovs-ofctl show mybridge```
 ![](images/1-OVS-Introduction/vd12.png)
 
