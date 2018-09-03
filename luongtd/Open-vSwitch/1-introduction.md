@@ -92,11 +92,11 @@ $ fakeroot debian/rules clean
 #### 5.1.1. Linux Bridge
 - Linux bridge là một phần mềm được tích hợp vào trong nhân Linux để giải quyết vấn đề ảo hóa phần network trong các máy vật lý. Về mặt logic, Linux bridge sẽ tạo ra một switch ảo để cho các máy ảo (VM) kết nối được vào và có thể nói chuyện với nhau cũng như sử dụng để kết nối với mạng ngoài.
 - Kiến trúc:
+	- Tap: Có thể hiểu là một giao diện mạng để các máy ảo có thể giao tiếp được với bridge và nó nằm trong nhân kernel. Tap hoạt động ở lớp 2 trong mô hình OSI.
+	- fd (forward data): dùng để chuyển tiếp data từ máy ảo.
 
 ![](images/1-OVS-Introduction/bridge-1.png)
 
-	- Tap: Có thể hiểu là một giao diện mạng để các máy ảo có thể giao tiếp được với bridge và nó nằm trong nhân kernel. Tap hoạt động ở lớp 2 trong mô hình OSI.
-	- fd (forward data): dùng để chuyển tiếp data từ máy ảo.
 - Chức năng của một switch ảo do Linux bridge tạo ra:
 	- STP: tính năng chống loop gói tin trong switch
 	- VLAN: Virtual LAN
