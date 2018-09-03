@@ -1,6 +1,13 @@
 # Tổng quan về Software Defined Networking và OpenvSwitch
+
+# Mục lục
+## [1. Software Defined Networking và OpenFlow](#SDN)
+## [2. OpenFlow](#OF)
+## [3. OpenvSwitch](#OVS)
+## [4. Cài đặt OpenvSwitch](#install)
+## [5. Ví dụ sử dụng OVS](#ex)
 ---
-## 1. Software Defined Networking và OpenFlow
+## <a name="SDN"></a> 1. Software Defined Networking và OpenFlow
 Software Defined Networking (SDN) hay mạng điều khiển bằng phần mềm hoạt động dựa trên cơ chế tách bạch việc kiểm soát một luồng mạng với luồng dữ liệu. SDN định nghĩa ra một lớp phần mềm đứng giữa các phần tử mạng và người quản trị mạng (là người cấu hình và cài đặt chúng). Lớp phần mềm này cung cấp cho người quản trị mạng khả năng điều khiển các thiết bị mạng của họ thông qua một giao diện phần mềm thay vì phải tự cấu hình phần cứng hoặc điều chỉnh các yếu tố vật lý của thiết bị mạng. 
 SDN tách riêng luồng điều khiển (control plane) với luồng dữ liệu (và data plane). Điều này cho phép luồng các gói dữ liệu đi qua mạng được kiểm soát theo lập trình. Control plane được tách ra từ các thiết bị vật lý và chuyển đến các bộ điều khiển (trong lớp phần mềm). Các bộ điều khiển tương tác với các thiết bị mạng vật lý thông qua giao thức Open Flow. 
 
@@ -9,7 +16,8 @@ Kiến trúc SDN gồm 3 lớp riêng biệt: lớp ứng dụng (Application La
 - Lớp ứng dụng: Là các ứng dựng kinh doanh đưọc triển khai trên mạng, được kết nối tới lớp điều khiển thông qua các API, cung cấp khả năng cho phép lớp ứng dụng lập trình lại (cấu hình lại) mạng (điều chỉnh các tham số trễ, băng thông, định tuyến,...) thông qua lớp điều khiển.
 - Lớp điều khiển: Là nơi tập trung các bộ điều khiển thực hiện việc điều khiển cấu hình mạng theo các yêu cầu từ lớp ứng dụng và khả năng của mạng. Các bộ điều khiển này có thể là các phần mềm được lập trình.
 - Lớp cơ sở hạ tầng: Là các thiết bị mạng thực tế (vật lý hay ảo hóa) thực hiện việc chuyển tiếp	gói tin theo sự điều khiển của lớp điều khiển. Một thiết bị mạng có thể hoạt động theo sự điều khiển của nhiều bộ điều khiển khác nhau, điều này giúp tăng cường khả năng ảo hóa của mạng.
-## 2. OpenFlow
+
+## <a name="OF"></a> 2. OpenFlow
 OpenFlow là tiêu chuẩn đầu tiên, cung cấp khả năng truyền thông giữa các giao diện của lớp điều khiển và lớp chuyển tiếp trong kiến trúc SDN. OpenFlow cho phép truy cập trực tiếp và điều khiển một mặt phẳng chuyển tiếp của các thiết bị mạng như switch, router, cả thiết bị vật lý và thiết bị ảo, do đó giúp di chuyển phần điều khiển mạng ra khỏi các thiết bị chuyển mạch thực tế tới phần mềm điều khiển trung tâm. Các quyết định về các luồng traffic sẽ được quyết định tập trung tại OpenFlow Controller giúp đơn giản hóa việc quản trị cấu hình trong toàn hệ thống. Một thiết bị OpenFlow bao gồm ít nhẩt ba thành phần:
 - Source Channel: Kênh nối thiết bị tới bộ điều khiển (Controller), cho phép các lệnh và gói tin được gửi giữa bộ điều khiển và thiết bị.
 - OpenFlow Protocol: giao thức cung cấp phương thức tiêu chuẩn và mở cho một bộ điều khiển truyền thông với thiết bị.
@@ -40,7 +48,7 @@ OpenFlow là tiêu chuẩn đầu tiên, cung cấp khả năng truyền thông 
 - ovs-vsctl: tiện ích để truy vấn và cập nhật cấu hình ovs-vswitchd
 - ovs-appctl: tiện ích gửi command để chạy OVS
 
-## 4. Cài đặt OpenvSwitch trên Ubuntu 18.04 LTS
+## <a name="install"></a> 4. Cài đặt OpenvSwitch trên Ubuntu 18.04 LTS
 ### 4.1. Building OpenvSwitch Debian packages
   1. Cài đặt các gói "build-essential" và fakeroot"
 ```sh
@@ -80,13 +88,14 @@ $ fakeroot debian/rules clean
 
 ![](images/1-OVS-Introduction/install.png)
 
-## 5. Ví dụ sử dụng OpenvSwitch
+## <a name="ex"></a> 5. Ví dụ sử dụng OpenvSwitch
 ### 5.1 Giới thiệu về Linux bridge và Mininet
 #### 5.1.1. Linux Bridge
 - Linux bridge là một phần mềm được tích hợp vào trong nhân Linux để giải quyết vấn đề ảo hóa phần network trong các máy vật lý. Về mặt logic, Linux bridge sẽ tạo ra một switch ảo để cho các máy ảo (VM) kết nối được vào và có thể nói chuyện với nhau cũng như sử dụng để kết nối với mạng ngoài.
 - Kiến trúc:
 
 ![](images/1-OVS-Introduction/bridge-1.png)
+
 	- Tap: Có thể hiểu là một giao diện mạng để các máy ảo có thể giao tiếp được với bridge và nó nằm trong nhân kernel. Tap hoạt động ở lớp 2 trong mô hình OSI.
 	- fd (forward data): dùng để chuyển tiếp data từ máy ảo.
 - Chức năng của một switch ảo do Linux bridge tạo ra:
