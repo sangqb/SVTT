@@ -186,6 +186,3 @@ Sơ đồ kết nối hoàn chỉnh:
 
 Như vậy, chúng ta đã tạo được bridge trên OpenvSwitch, tạo được các interface ảo và gắn cho các máy ảo để kết nối với bên ngoài.
 
-##Note:
-Wireless base stations generally only allow packets with the source MAC address of NIC that completed the initial handshake. Therefore, without MAC rewriting, only a single device can  communicate over a single wireless link.
-This isn't specific to Open vSwitch, it's enforced by the access point, so the same problems will show up with the Linux bridge or any other way to do bridging.
