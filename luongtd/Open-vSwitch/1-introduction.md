@@ -76,7 +76,8 @@ $ fakeroot debian/rules clean
 ![](images/1-OVS-Introduction/build5.png)
 
 ### 4.2. Cài đặt .deb Packages
-  Các lệnh này áp dụng để cài đặt từ các gói Debian mà ta vừa tự xây dựng, như được mô tả trong phần trước. Trong trường hợp này, sử dụng lệnh như ```dpkg -i``` để cài đặt các tệp .deb mà ta tạo. Ta sẽ phải tự cài đặt bất kỳ phụ thuộc bị thiếu nào.
+  Các lệnh này áp dụng để cài đặt từ các gói Debian mà ta vừa tự xây dựng, như được mô tả trong phần trước. Trong trường hợp này, sử dụng lệnh như ```dpkg -i``` để cài đặt các tệp .deb mà ta tạo. Ta sẽ phải tự cài đặt bất kỳ phụ thuộc bị thiếu nào. kết quả thu được như sau:
+
 ![](images/1-OVS-Introduction/install.png)
 
 ## 5. Ví dụ sử dụng OpenvSwitch
@@ -84,6 +85,7 @@ $ fakeroot debian/rules clean
 #### 5.1.1. Linux Bridge
 - Linux bridge là một phần mềm được tích hợp vào trong nhân Linux để giải quyết vấn đề ảo hóa phần network trong các máy vật lý. Về mặt logic, Linux bridge sẽ tạo ra một switch ảo để cho các máy ảo (VM) kết nối được vào và có thể nói chuyện với nhau cũng như sử dụng để kết nối với mạng ngoài.
 - Kiến trúc:
+![](images/1-OVS-Introduction/bridge-1.png)
 	- Tap: Có thể hiểu là một giao diện mạng để các máy ảo có thể giao tiếp được với bridge và nó nằm trong nhân kernel. Tap hoạt động ở lớp 2 trong mô hình OSI.
 	- fd (forward data): dùng để chuyển tiếp data từ máy ảo.
 - Chức năng của một switch ảo do Linux bridge tạo ra:
@@ -122,12 +124,12 @@ Ta vừa thêm một OpenvSwitch có tên mybridge. Ở thời điểm này mybr
 - Kiểm tra kết nối với internet: ```ping google.com```
 ![](images/1-OVS-Introduction/vd4.png)
 
-Có vẻ như laptop đã bị mất kết nối internet. Bằng lệnh ```sudo ovs-vsctl add port mybridge wlp2s0``` ta đã định hướng lại wlp2s0 kết nối với mybridge. 
+Có vẻ như laptop đã bị mất kết nối internet. Bằng lệnh ```sudo ovs-vsctl add port mybridge enp3s0``` ta đã định hướng lại enp3s0 kết nối với mybridge.
 ![](images/1-OVS-Introduction/model3.png)
 Đó là chính xác là điều ta muốn nhưng laptop vẫn thử kết nối với network bên ngoài trực tiếp qua enp3s0 (mặc dù liên kết này không còn nữa).
 Bây giờ, ta sẽ điều khiển luồng kết nối từ laptop tới switch ảo mybridge để đến được cổng enp3s0 bằng cách xóa cấu hình IP của enp3s0 và thiết lập mybridge thành một DHCP client. Sơ đồ dưới đây thể hiện hướng kết nối mà ta sẽ thực hiện. 
 ![](images/1-OVS-Introduction/model4.png)
-- Xóa cấu hình IP của wlp2s0: 
+- Xóa cấu hình IP của enp3s0: 
 ```sudo ifconfig enp3s0 0```
 - Chuyển cổng (internal port) mybridge thành một DHCP client để nó có thể nhận IP và Default Gateway từ giao thức DHCP: 
 ```sudo dhclient mybridge```
