@@ -14,7 +14,7 @@ Kiến trúc SDN gồm 3 lớp riêng biệt: lớp ứng dụng (Application La
 ![](images/1-OVS-Introduction/1-SDN-Arch.png)
 - Lớp ứng dụng: Là các ứng dựng kinh doanh đưọc triển khai trên mạng, được kết nối tới lớp điều khiển thông qua các API, cung cấp khả năng cho phép lớp ứng dụng lập trình lại (cấu hình lại) mạng (điều chỉnh các tham số trễ, băng thông, định tuyến,...) thông qua lớp điều khiển.
 - Lớp điều khiển: Là nơi tập trung các bộ điều khiển thực hiện việc điều khiển cấu hình mạng theo các yêu cầu từ lớp ứng dụng và khả năng của mạng. Các bộ điều khiển này có thể là các phần mềm được lập trình.
-- Lớp cơ sở hạ tầng: Là các thiết bị mạng thực tế (vật lý hay ảo hóa) thực hiện việc chuyển tiếp	gói tin theo sự điều khiển của lớp điều khiển. Một thiết bị mạng có thể hoạt động theo sự điều khiển của nhiều bộ điều khiển khác nhau, điều này giúp tăng cường khả năng ảo hóa của mạng.
+- Lớp cơ sở hạ tầng: Là các thiết bị mạng thực tế (vật lý hay ảo hóa) thực hiện việc chuyển tiếp  gói tin theo sự điều khiển của lớp điều khiển. Một thiết bị mạng có thể hoạt động theo sự điều khiển của nhiều bộ điều khiển khác nhau, điều này giúp tăng cường khả năng ảo hóa của mạng.
 
 ## <a name="OF"></a> 2. OpenFlow
 OpenFlow là tiêu chuẩn đầu tiên, cung cấp khả năng truyền thông giữa các giao diện của lớp điều khiển và lớp chuyển tiếp trong kiến trúc SDN. OpenFlow cho phép truy cập trực tiếp và điều khiển một mặt phẳng chuyển tiếp của các thiết bị mạng như switch, router, cả thiết bị vật lý và thiết bị ảo, do đó giúp di chuyển phần điều khiển mạng ra khỏi các thiết bị chuyển mạch thực tế tới phần mềm điều khiển trung tâm. Các quyết định về các luồng traffic sẽ được quyết định tập trung tại OpenFlow Controller giúp đơn giản hóa việc quản trị cấu hình trong toàn hệ thống. Một thiết bị OpenFlow bao gồm ít nhẩt ba thành phần:
@@ -94,15 +94,15 @@ Trong ví dụ này, ta sẽ tạo ra một bridge trên OpenvSwitch đóng vai 
 #### 5.1.1. Linux Bridge
 - Linux bridge là một phần mềm được tích hợp vào trong nhân Linux để giải quyết vấn đề ảo hóa phần network trong các máy vật lý. Về mặt logic, Linux bridge sẽ tạo ra một switch ảo để cho các máy ảo (VM) kết nối được vào và có thể nói chuyện với nhau cũng như sử dụng để kết nối với mạng ngoài.
 - Kiến trúc:
-	- Tap: Có thể hiểu là một giao diện mạng để các máy ảo có thể giao tiếp được với bridge và nó nằm trong nhân kernel. Tap hoạt động ở lớp 2 trong mô hình OSI.
-	- fd (forward data): dùng để chuyển tiếp data từ máy ảo.
+  - Tap: Có thể hiểu là một giao diện mạng để các máy ảo có thể giao tiếp được với bridge và nó nằm trong nhân kernel. Tap hoạt động ở lớp 2 trong mô hình OSI.
+  - fd (forward data): dùng để chuyển tiếp data từ máy ảo.
 
 ![](images/1-OVS-Introduction/bridge-1.png)
 
 - Chức năng của một switch ảo do Linux bridge tạo ra:
-	- STP: tính năng chống loop gói tin trong switch
-	- VLAN: Virtual LAN
-	- FDB: tính năng chuyển gói tin theo database được xây dựng giúp tăng tốc độ switch
+  - STP: tính năng chống loop gói tin trong switch
+  - VLAN: Virtual LAN
+  - FDB: tính năng chuyển gói tin theo database được xây dựng giúp tăng tốc độ switch
 
 
 #### 5.1.2. Mininet
@@ -151,8 +151,8 @@ Bây giờ, ta sẽ điều khiển luồng kết nối từ laptop tới switch
 - Kiểm tra kết nối: ping google.com
 ![](images/1-OVS-Introduction/vd6.png)
 Như vậy là ta đã thiết lập thành công hướng kết nối mong muốn đi qua vSwitch mybridge và có thể kết nối lại với internet. Tiếp theo ta sẽ thêm 2 tap interface để sử dụng cho kết nối với các máy ảo (Ubuntu Mininet).
-- Thêm tap interfaces vào mybridge để sử dụng cho các máy ảo: 	
-```ip tuntap add mode tap vport1```							
+- Thêm tap interfaces vào mybridge để sử dụng cho các máy ảo:   
+```ip tuntap add mode tap vport1```             
 ```ip tuntap add mode tap vport2```
 - Bật (turn up) port1 và port
 ```ifconfig vport1 up ```
@@ -161,7 +161,7 @@ Như vậy là ta đã thiết lập thành công hướng kết nối mong mu�
 ![](images/1-OVS-Introduction/vd7.png)
 
 Ta đã tạo được 2 interface ảo.
-- Thêm tap interfaces vào mybridge:	
+- Thêm tap interfaces vào mybridge: 
 ```ovs-vsctl add-port mybridge vport1 -- add-port mybridge vport2```
 - Kiểm tra chi tiết mybridge: ```ovs-vsctl show ```
 ![](images/1-OVS-Introduction/vd8.png)
@@ -173,6 +173,9 @@ Như vậy ta đã gán hai interface ảo vào mybridge. Sơ đồ tương đư
 ![](images/1-OVS-Introduction/vd9.png)
 - Hai máy ảo đã nhận được IP từ DHCP và có thể kết nối với bên ngoài.
 ![](images/1-OVS-Introduction/vd10.png)
+
+Sơ đồ kết nối hoàn chỉnh:
+![](images/1-OVS-Introduction/model6.png)
 
 - Xem forwarding table (MAC address table): 
 ```sudo ovs-appctl fdb/show mybridge ```
