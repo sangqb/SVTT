@@ -83,7 +83,7 @@ $ fakeroot debian/rules clean
 ![](images/1-OVS-Introduction/build5.png)
 
 ### 4.2. Cài đặt .deb Packages
-  Các lệnh này áp dụng để cài đặt từ các gói Debian mà ta vừa tự xây dựng, như được mô tả trong phần trước. Trong trường hợp này, sử dụng lệnh như ```dpkg -i``` để cài đặt các tệp .deb mà ta tạo. Ta sẽ phải tự cài đặt bất kỳ phụ thuộc bị thiếu nào. kết quả thu được như sau:
+  Các lệnh này áp dụng để cài đặt từ các gói Debian mà ta vừa tự xây dựng, như được mô tả trong phần trước. Trong trường hợp này, sử dụng lệnh như ```dpkg -i``` để cài đặt các tệp .deb mà ta tạo. Ta sẽ phải tự cài đặt bất kỳ phụ thuộc bị thiếu nào. Kết quả thu được như sau:
 
 ![](images/1-OVS-Introduction/install.png)
 
@@ -186,3 +186,6 @@ Sơ đồ kết nối hoàn chỉnh:
 
 Như vậy, chúng ta đã tạo được bridge trên OpenvSwitch, tạo được các interface ảo và gắn cho các máy ảo để kết nối với bên ngoài.
 
+##Note:
+Wireless base stations generally only allow packets with the source MAC address of NIC that completed the initial handshake. Therefore, without MAC rewriting, only a single device can  communicate over a single wireless link.
+This isn't specific to Open vSwitch, it's enforced by the access point, so the same problems will show up with the Linux bridge or any other way to do bridging.
