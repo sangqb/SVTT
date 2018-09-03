@@ -11,4 +11,4 @@
 	- __ovsdb-server__: Là database server của OVS chạy trên user space
 	- __kernel module__ (data path): Là module thuộc kernel space, thực hiện công việc chuyển tiếp gói tin.		
 
-## <a name="detail"></a> 1. Kiến trúc chi tiết
+## <a name="detail"></a> 2. Kiến trúc chi tiết
