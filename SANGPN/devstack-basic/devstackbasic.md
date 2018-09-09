@@ -139,43 +139,43 @@ Tìm đến đoạn [[local|localrc]] và thêm vào HOST\_IP phù hợp.
 
 **openstack image create**
 
-**[--id <id> ]**
+**[--id (id) ]**
 
-**[--store <store>]**         
+**[--store (store)]**         
 
-**[--container-format <container-format>]**
+**[--container-format (container-format)]**
 
-**[--disk-format <disk-format>]**
+**[--disk-format (disk-format)]**
 
-**[--size <size>]**
+**[--size (size)]**
 
-**[--min-disk <disk-gb>]**
+**[--min-disk (disk-gb)]**
 
-**[--min-ram <ram-mb>]**
+**[--min-ram (ram-mb)]**
 
-**[--location <image-url>]**
+**[--location (image-url)]**
 
-**[--copy-from <image-url>]**
+**[--copy-from (image-url)]**
 
-**[--file <file> | --volume <volume>]**
+**[--file (file) | --volume (volume)]**
 
 **[--force]**
 
-**[--checksum <checksum>]**
+**[--checksum (checksum)]**
 
 **[--protected | --unprotected]**
 
 **[--public | --private | --community | --shared]**
 
-**[--property <key=value> [...] ]**
+**[--property (key=value) [...] ]**
 
-**[--tag <tag> [...] ]**
+**[--tag (tag) [...] ]**
 
-**[--project <project>]**
+**[--project (project)]**
 
-**[--project-domain <project-domain>]**
+**[--project-domain (project-domain)]**
 
-**<image-name>**
+**image-name**
 
 Trong đó:
 
@@ -185,69 +185,69 @@ Trong đó:
 
 - Xóa Image:
 
-**openstack image delete <image>**
+**openstack image delete image**
 
 - Sửa Image:
 
 **openstack image set**
 
-**[--name <name>]**
+**[--name (name)]**
 
-**[--min-disk <disk-gb>]**
+**[--min-disk (disk-gb)]**
 
-**[--min-ram <ram-mb>]**
+**[--min-ram (ram-mb)]**
 
-**[--container-format <container-format>]**
+**[--container-format (container-format)]**
 
-**[--disk-format <disk-format>]**
+**[--disk-format (disk-format)]**
 
-**[--size <size>]**
+**[--size (size)]**
 
 **[--protected | --unprotected]**
 
 **[--public | --private | --community | --shared]**
 
-**[--store <store>]**
+**[--store (store)]**
 
-**[--location <image-url>]**
+**[--location (image-url)]**
 
-**[--copy-from <image-url>]**
+**[--copy-from (image-url)]**
 
-**[--file <file>]**
+**[--file (file)]**
 
-**[--volume <volume>]**
+**[--volume (volume)]**
 
 **[--force]**
 
-**[--checksum <checksum>]**
+**[--checksum (checksum)]**
 
 **[--stdin]**
 
-**[--property <key=value> [...] ]**
+**[--property (key=value) [...] ]**
 
-**[--tag <tag> [...] ]**
+**[--tag (tag) [...] ]**
 
-**[--architecture <architecture>]**
+**[--architecture (architecture)]**
 
-**[--instance-id <instance-id>]**
+**[--instance-id (instance-id)]**
 
-**[--kernel-id <kernel-id>]**
+**[--kernel-id (kernel-id)]**
 
-**[--os-distro <os-distro>]**
+**[--os-distro (os-distro)]**
 
-**[--os-version <os-version>]**
+**[--os-version (os-version)]**
 
-**[--ramdisk-id <ramdisk-id>]**
+**[--ramdisk-id (ramdisk-id)]**
 
 **[--deactivate | --activate]**
 
-**[--project <project>]**
+**[--project (project)]**
 
-**[--project-domain <project-domain>]**
+**[--project-domain (project-domain)]**
 
 **[--accept | --reject | --pending]**
 
-**<image>**
+**image**
 
 Ví dụ ta tạo một Image tên là image1, với disk-format là qcow2 và container-format là bare:
 
@@ -275,7 +275,7 @@ Xóa image1:
 
 #### 2.3.1. Thêm, sửa các network:
 
-- Thêm network: **neutron net-create <net-name>**
+- Thêm network: **neutron net-create (net-name)**
 
 Ví dụ:
 
@@ -287,7 +287,7 @@ Ví dụ:
 
 ![](https://i.imgur.com/mINxNhk.png)
 
-#### 2.3.2. Xóa network: openstack delete <network ID>
+#### 2.3.2. Xóa network: openstack delete (network ID)
 
 
 
