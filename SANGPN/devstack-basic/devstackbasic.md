@@ -90,19 +90,19 @@ Tìm đến đoạn [[local|localrc]] và thêm vào HOST\_IP phù hợp.
 - Thêm group:
 
 -
-  - CLI: **openstack group create --domain \&lt;domain\&gt; --description \&lt;descripton\&gt; \&lt;group name\&gt;**
+  - CLI: **openstack group create --domain <domain> --description <descripton> <group name>**
   - Dashboard: Identity Group Create Group và điền tên, mô tả cho Group:
 
 ![](https://i.imgur.com/ge5CurN.png)
 
 - Sửa Group:
-  - CLI: **openstack group set --domain \&lt;domain\&gt; --name \&lt;name\&gt; --description \&lt;description\&gt; \&lt;group\&gt;**
+  - CLI: **openstack group set --domain <domain> --name <name> --description <description> <group>**
   - Dashboard: ta vào phần mũi tên Edit Group để chỉnh sửa thông tin Group hoặc vào Manage Members để quản lý user trong Group đó.
 
 ![](https://i.imgur.com/Wmq4WMd.png)
 
 - Xóa Group:
-  - CLI: **openstack group delete --domain \&lt;domain\&gt; \&lt;group\&gt;**
+  - CLI: **openstack group delete --domain <domain> <group>**
   - Dashboard: ta chọn phần mũi tên sau Group cần xóa và chọn Delete Group:
 
 ![](https://i.imgur.com/NS4aPoh.png)
@@ -110,19 +110,19 @@ Tìm đến đoạn [[local|localrc]] và thêm vào HOST\_IP phù hợp.
 #### 2.1.3. Thêm, sửa, xóa Project:
 
 - Thêm Project:
-  - CLI: **openstack project create --description \&lt;description\&gt; project\_name --domain \&lt;domain\&gt;**
+  - CLI: **openstack project create --description <description> project_name --domain <domain>**
   - Dashboard: Identity Project Create Project và sau đó điền thông tin của Project, chọn Project Members, Project Groups:
 
 ![](https://i.imgur.com/ky39BDJ.png)
 
 - Sửa Project:
-  - CLI: **openstack project set PROJECT\_ID --name \&lt;new name\&gt; --description \&lt;new description\&gt;** …
+  - CLI: **openstack project set PROJECT_ID --name <new name> --description <new description>** …
   - Dashboard: Ở phần mũi tên phía sau Project ta chọn Edit Project và chỉnh sửa các thông tin cần thiết:
 
 ![](https://i.imgur.com/NnALl5M.png)
 
 - Xóa Project:
-  - CLI: **openstack project delete PROJECT\_ID**
+  - CLI: **openstack project delete PROJECT_ID**
   - Dashboard: Như ở phần chỉnh sửa Project nhưng ta chọn mục Delete Project.
 
 #### 2.1.4. Gán roles:
@@ -130,8 +130,8 @@ Tìm đến đoạn [[local|localrc]] và thêm vào HOST\_IP phù hợp.
 - List user và ghi nhớ các user mà muốn gán role: **openstack user list**
 - List role ID và ghi nhớ role ID mà muốn gán: **openstack role list**
 - List project và ghi nhớ project ID muốn gán role: **openstack project list**
-- Gán role cho cặp user-project: **openstack role add --user USER\_NAME --project TENANT\_ID ROLE\_NAME**
-- Xác minh việc gán role: **openstack role assignment list --user USER\_NAME  --project PROJECT\_ID --names**
+- Gán role cho cặp user-project: **openstack role add --user USER_NAME --project TENANT_ID ROLE_NAME**
+- Xác minh việc gán role: **openstack role assignment list --user USER_NAME  --project PROJECT_ID --names**
 
 ### 2.2. Glance: Thêm, sửa, xóa các Images.
 
@@ -139,43 +139,43 @@ Tìm đến đoạn [[local|localrc]] và thêm vào HOST\_IP phù hợp.
 
 **openstack image create**
 
-**    [--id \&lt;id\&gt;]**
+**[--id <id> ]**
 
-**    [--store \&lt;store\&gt;]       **
+**[--store <store>]**         
 
-**    [--container-format \&lt;container-format\&gt;]**
+**[--container-format <container-format>]**
 
-**    [--disk-format \&lt;disk-format\&gt;]**
+**[--disk-format <disk-format>]**
 
-**    [--size \&lt;size\&gt;]**
+**[--size <size>]**
 
-**    [--min-disk \&lt;disk-gb\&gt;]**
+**[--min-disk <disk-gb>]**
 
-**    [--min-ram \&lt;ram-mb\&gt;]**
+**[--min-ram <ram-mb>]**
 
-**    [--location \&lt;image-url\&gt;]**
+**[--location <image-url>]**
 
-**    [--copy-from \&lt;image-url\&gt;]**
+**[--copy-from <image-url>]**
 
-**    [--file \&lt;file\&gt; | --volume \&lt;volume\&gt;]**
+**[--file <file> | --volume <volume>]**
 
-**    [--force]**
+**[--force]**
 
-**    [--checksum \&lt;checksum\&gt;]**
+**[--checksum <checksum>]**
 
-**    [--protected | --unprotected]**
+**[--protected | --unprotected]**
 
-**    [--public | --private | --community | --shared]**
+**[--public | --private | --community | --shared]**
 
-**    [--property \&lt;key=value\&gt; [...] ]**
+**[--property <key=value> [...] ]**
 
-**    [--tag \&lt;tag\&gt; [...] ]**
+**[--tag <tag> [...] ]**
 
-**    [--project \&lt;project\&gt;]**
+**[--project <project>]**
 
-**    [--project-domain \&lt;project-domain\&gt;]**
+**[--project-domain <project-domain>]**
 
-**    \&lt;image-name\&gt;**
+**<image-name>**
 
 Trong đó:
 
@@ -185,69 +185,69 @@ Trong đó:
 
 - Xóa Image:
 
-**openstack image delete \&lt;image\&gt;**
+**openstack image delete <image>**
 
 - Sửa Image:
 
 **openstack image set**
 
-**    [--name \&lt;name\&gt;]**
+**[--name <name>]**
 
-**    [--min-disk \&lt;disk-gb\&gt;]**
+**[--min-disk <disk-gb>]**
 
-**    [--min-ram \&lt;ram-mb\&gt;]**
+**[--min-ram <ram-mb>]**
 
-**    [--container-format \&lt;container-format\&gt;]**
+**[--container-format <container-format>]**
 
-**    [--disk-format \&lt;disk-format\&gt;]**
+**[--disk-format <disk-format>]**
 
-**    [--size \&lt;size\&gt;]**
+**[--size <size>]**
 
-**    [--protected | --unprotected]**
+**[--protected | --unprotected]**
 
-**    [--public | --private | --community | --shared]**
+**[--public | --private | --community | --shared]**
 
-**    [--store \&lt;store\&gt;]**
+**[--store <store>]**
 
-**    [--location \&lt;image-url\&gt;]**
+**[--location <image-url>]**
 
-**    [--copy-from \&lt;image-url\&gt;]**
+**[--copy-from <image-url>]**
 
-**    [--file \&lt;file\&gt;]**
+**[--file <file>]**
 
-**    [--volume \&lt;volume\&gt;]**
+**[--volume <volume>]**
 
-**    [--force]**
+**[--force]**
 
-**    [--checksum \&lt;checksum\&gt;]**
+**[--checksum <checksum>]**
 
-**    [--stdin]**
+**[--stdin]**
 
-**    [--property \&lt;key=value\&gt; [...] ]**
+**[--property <key=value> [...] ]**
 
-**    [--tag \&lt;tag\&gt; [...] ]**
+**[--tag <tag> [...] ]**
 
-**    [--architecture \&lt;architecture\&gt;]**
+**[--architecture <architecture>]**
 
-**    [--instance-id \&lt;instance-id\&gt;]**
+**[--instance-id <instance-id>]**
 
-**    [--kernel-id \&lt;kernel-id\&gt;]**
+**[--kernel-id <kernel-id>]**
 
-**    [--os-distro \&lt;os-distro\&gt;]**
+**[--os-distro <os-distro>]**
 
-**    [--os-version \&lt;os-version\&gt;]**
+**[--os-version <os-version>]**
 
-**    [--ramdisk-id \&lt;ramdisk-id\&gt;]**
+**[--ramdisk-id <ramdisk-id>]**
 
-**    [--deactivate | --activate]**
+**[--deactivate | --activate]**
 
-**    [--project \&lt;project\&gt;]**
+**[--project <project>]**
 
-**    [--project-domain \&lt;project-domain\&gt;]**
+**[--project-domain <project-domain>]**
 
-**    [--accept | --reject | --pending]**
+**[--accept | --reject | --pending]**
 
-**    \&lt;image\&gt;**
+**<image>**
 
 Ví dụ ta tạo một Image tên là image1, với disk-format là qcow2 và container-format là bare:
 
@@ -275,7 +275,7 @@ Xóa image1:
 
 #### 2.3.1. Thêm, sửa các network:
 
-- Thêm network: **neutron net-create \&lt;net-name\&gt;**
+- Thêm network: **neutron net-create <net-name>**
 
 Ví dụ:
 
@@ -287,7 +287,7 @@ Ví dụ:
 
 ![](https://i.imgur.com/mINxNhk.png)
 
-#### 2.3.2. Xóa network: openstack delete \&lt;network ID\&gt;
+#### 2.3.2. Xóa network: openstack delete <network ID>
 
 
 
