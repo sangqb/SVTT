@@ -261,7 +261,7 @@ OpenStack là một phần mềm mã nguồn mở, dùng để triển khai Clou
 -	Database: là cơ sở dữ liệu lưu trữ image metadata.
 -	Storage repository: tích hợp với các thành phần OpenStack khác nhau bên ngoài như hệ thống tệp thông thường, Amazon S3 và HTTP cho kho lưu trữ hình ảnh…
 ## 5.3. Luồng tạo Images:
-- Glance Image Status: Sau đây là các trạng thái của Image khi upload:
+Glance Image Status: Sau đây là các trạng thái của Image khi upload:
 ![](https://i.imgur.com/27Ldmq9.png)
 -	queued: Không có dữ liệu hình ảnh nào được tải lên Glance và kích thước hình ảnh không được thiết lập rõ ràng về 0 khi tạo.
 -	saving: Raw data của Image đang được tải lên Glance.
@@ -272,7 +272,7 @@ OpenStack là một phần mềm mã nguồn mở, dùng để triển khai Clou
 -	killed: Đã xảy ra lỗi khi tải lên dữ liệu của Image và không thể đọc được.
 -	deleted: Glance đã giữ lại thông tin về Image, nhưng nó không còn có sẵn để sử dụng.
 -	pending_delete: Tương tự như deleted. Tuy nhiên Image trong trạng thái này không thể khôi phục được.
--	Tạo Image:
+Tạo Image:
 +	Tạo Image-status object.
 +	Lấy dữ liệu từ nơi được chỉ định.
 +	Xác minh dữ liệu.
