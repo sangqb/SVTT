@@ -6,7 +6,7 @@
 
 - Python là một ngôn ngữ lập trình bậc cao cho các mục đích lập trình đa năng, do Guido van Rossum tạo ra và lần đầu ra mắt vào năm 1991.
 
-![]([https://en.wikipedia.org/wiki/Guido\_van\_Rossum#/media/File:Guido-portrait-2014-curvves.jpg](https://en.wikipedia.org/wiki/Guido_van_Rossum#/media/File:Guido-portrait-2014-curvves.jpg))
+![]([https://en.wikipedia.org/wiki/Guido\_van\_Rossum#/media/File:Guido-portrait-2014-curvves.jpg)
 
 - Cú pháp của Python là khá dễ dàng để học và ngôn ngữ này cũng mạnh mẽ và linh hoạt không kém các ngôn ngữ khác trong việc phát triển các ứng dụng. Python hỗ trợ mẫu đa lập trình, bao gồm lập trình hướng đối tượng, lập trình hàm và mệnh lệnh hoặc là các phong cách lập trình theo thủ tục…
 
@@ -62,15 +62,15 @@ else:
 
 - Chương trình in ra màn hình đơn giản:
 
-![]([https://i.imgur.com/7gl5hwQ.png](https://i.imgur.com/7gl5hwQ.png))
+![](https://i.imgur.com/7gl5hwQ.png)
 
 - Chương trình in ra màn hình host name và IP của máy đang dùng:
 
-![]([https://i.imgur.com/o3ccxs2.png](https://i.imgur.com/o3ccxs2.png))
+![](https://i.imgur.com/o3ccxs2.png)
 
 - Tính diện tích tam giác biết độ dài 3 cạnh:
 
-![]([https://imgur.com/a/QeZrgKd](https://imgur.com/a/QeZrgKd))
+![](https://imgur.com/a/QeZrgKd)
 
 ## 2.2. Socket trong Python:
 
