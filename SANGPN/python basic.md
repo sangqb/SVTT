@@ -70,7 +70,7 @@ else:
 
 - Tính diện tích tam giác biết độ dài 3 cạnh:
 
-![](https://imgur.com/a/QeZrgKd.png)
+![](https://i.imgur.com/v9Q5wSG.png)
 
 ## 2.2. Socket trong Python:
 
